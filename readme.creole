@@ -1,4 +1,4 @@
-= Emify Package
+= PxToEm Package
 
 This plugin searches base em(px) size and then converts all px to em in the selected line
 
