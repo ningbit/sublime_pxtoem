@@ -1,6 +1,6 @@
 import sublime, sublime_plugin, re
 
-def new_css(css):
+def replace_px(css):
     # Example css: "width: 12px; /16"
     # grabs "12px"
     px_s = re.search(r'\d+px',css).group()
@@ -31,33 +31,32 @@ def new_css(css):
 class PxToEmCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
-        for region in self.view.sel():  
+        for region in self.view.sel():
             # grabs entire line from selection
             line = self.view.line(region)
             css = self.view.substr(line)
 
             if css.find('\n') != -1:
-                print "multiple line selection not supported"
+                print "Multiple line selection not supported"
+                return
             elif re.search(r'px.+px.+px.+px.+px',css):
-                print "Invalid CSS: too many (px)'s to process"        
+                print "Invalid CSS: too many (px)'s to process"
+                return
             elif re.search(r'px.+px.+px.+px',css):
-                print "found 4 (px)'s"
-                s = new_css(css)
-                s = new_css(s)
-                s = new_css(s)
-                s = new_css(s)
-                self.view.replace(edit, line, s)                   
+                px_count = 4
             elif re.search(r'px.+px.+px',css):
-                print "found 3 (px)'s"
-                s = new_css(css)
-                s = new_css(s)
-                s = new_css(s)
-                self.view.replace(edit, line, s)                
+                px_count = 3
             elif re.search(r'px.+px',css):
-                print "found 2 (px)'s"
-                s = new_css(css)
-                s = new_css(s)
-                self.view.replace(edit, line, s)
+                px_count = 2
+            elif re.search(r'px',css):
+                px_count = 1
+            else:
+                print "no px found"
+                return
 
-            else:          
-                self.view.replace(edit, line, new_css(css))
+            s = css
+            while (px_count > 0):
+                s = replace_px(s)
+                px_count -= 1
+
+            self.view.replace(edit, line, s)
