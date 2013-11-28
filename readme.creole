@@ -6,7 +6,7 @@ Default keybinding is cmd + ctrl + e
 
 == License
 
-All of Emify is licensed under the MIT license.
+All of PxToEm is licensed under the MIT license.
 
   Copyright (c) 2013 Ning Yap <ning.yap@gmail.com>
 
