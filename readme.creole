@@ -1,5 +1,7 @@
 = PxToEm Package
 
+{{https://f.cloud.github.com/assets/3534033/1641304/6ecf20dc-5850-11e3-9c4a-fe651d563c27.gif|pxtoem}} 
+ 
 This plugin searches base em(px) size and then converts all px to em in the selected line
 
 Default keybinding is cmd + ctrl + e
