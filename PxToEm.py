@@ -35,9 +35,9 @@ class PxToEmCommand(sublime_plugin.TextCommand):
             css = self.view.substr(line)
 
             if css.find('\n') != -1:
-                print "Multiple line selection not supported"
+                print("Multiple line selection not supported")
             elif (re.search(r'px',css) == None):
-                print "No px found"
+                print("No px found")
             else:
                 while (re.search(r'px',css)):
                     css = replace_px(css)
