@@ -6,6 +6,9 @@ This plugin searches base em(px) size and then converts all px to em in the sele
 
 Default keybinding is cmd + ctrl + e
 
+== Version History
+v1.1.0 - Added multi-line selection conversion support
+
 == License
 
 All of PxToEm is licensed under the MIT license.
