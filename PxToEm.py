@@ -31,15 +31,21 @@ class PxToEmCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         for region in self.view.sel():
             # grabs entire line from selection
-            line = self.view.line(region)
-            css = self.view.substr(line)
+            selection = self.view.line(region)
+            css = self.view.substr(selection)
 
-            if css.find('\n') != -1:
-                print("Multiple line selection not supported")
-            elif (re.search(r'px',css) == None):
+            if (re.search(r'px',css) == None):
                 print("No px found")
-            else:
-                while (re.search(r'px',css)):
-                    css = replace_px(css)
 
-                self.view.replace(edit, line, css)
+            else:
+                # check for multi-line selections
+                css =  css.split("\n")
+                new_css = ""
+
+                # iterates through each line of css and calls replace_px, concats new_css with \n per new line
+                for each_line in css:
+                    while (re.search(r'px',each_line)):
+                        each_line = replace_px(each_line)
+                    new_css = new_css + each_line + "\n"
+
+                self.view.replace(edit, selection, new_css.rstrip())                    
